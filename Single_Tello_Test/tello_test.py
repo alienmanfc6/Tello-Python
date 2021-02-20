@@ -1,14 +1,10 @@
 from tello import Tello
-import sys
 from datetime import datetime
 import time
 
 start_time = str(datetime.now())
 
-file_name = sys.argv[1]
-
-f = open(file_name, "r")
-commands = f.readlines()
+commands = ["command", "takeoff", "delay 5", "battery?", "forward 20", "left 20", "backward 20", "right 20", "land"]
 
 tello = Tello()
 for command in commands:
@@ -17,7 +13,7 @@ for command in commands:
 
         if command.find('delay') != -1:
             sec = float(command.partition('delay')[2])
-            print 'delay %s' % sec
+            print('delay %s' % sec)
             time.sleep(sec)
             pass
         else:
