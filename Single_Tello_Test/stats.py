@@ -15,19 +15,16 @@ class Stats:
         self.response = response
         self.end_time = datetime.now()
         self.duration = self.get_duration()
-        # self.print_stats()
+        self.print_stats()
 
     def get_duration(self):
         diff = self.end_time - self.start_time
         return diff.total_seconds()
 
     def print_stats(self):
-        print('\nid: %s' % self.id)
-        print('command: %s' % self.command)
-        print('response: %s' % self.response)
-        print('start time: %s' % self.start_time)
-        print('end_time: %s' % self.end_time)
-        print('duration: %s\n' % self.duration)
+        print('\nLog id: %s' % self.id)
+        print('Command: %s' % self.command)
+        print('Response: %s' % self.response)
 
     def got_response(self):
         if self.response is None:
