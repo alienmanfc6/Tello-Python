@@ -8,6 +8,7 @@ commands = ["battery?", "delay 5", "height?"]
 
 print("Tello booting up...")
 tello = Tello()
+time.sleep(2)
 tello.send_command("command")
 time.sleep(2)
 
