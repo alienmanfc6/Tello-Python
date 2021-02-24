@@ -15,14 +15,31 @@ print('Tello: command takeoff land flip forward back left right \r\n       up do
 print('end -- quit demo.\r\n')
 
 # start SDK mode
-tello.send_command("command")
+tello.start_up()
+
+
+def move_square():
+    tello.move("forward", 20)
+    # tello.go_forward(20)
+    # tello.go_right(20)
+    # tello.go_backward(20)
+
 
 while True:
 
     try:
+        # print("Height: %s" % tello.get_height())
         command = input("")
 
         if not command:
+            break
+
+        if 'square' in command:
+            move_square()
+            break
+
+        if 'wifi' in command:
+            tello.connect_to_wifi()
             break
 
         if 'end' in command:

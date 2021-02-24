@@ -18,6 +18,9 @@ class Tello:
         self.tello_port = 8889
         self.tello_adderss = (self.tello_ip, self.tello_port)
 
+    def start_up(self):
+        self.send_command("command")
+
     def send_command(self, command):
         print('sending command: %s to %s' % (command, self.tello_ip))
         return self.socket.sendto(command.encode('utf-8'), self.tello_adderss)
@@ -36,26 +39,34 @@ class Tello:
         #     self.socket.sendto('land'.encode('utf-8'), (ip, 8889))
         # self.socket.close()
 
-    def takeOff(self):
+    def take_off(self):
         return self.send_command("takeoff")
 
     def land(self):
         return self.send_command("land")
 
-    def goUp(self, distance):
-        move(self, "up", distance)
+    def go_up(self, distance):
+        self.move(self, "up", distance)
 
-    def goDown(self, distance):
-        move(self, "down", distance)
+    def go_down(self, distance):
+        self.move(self, "down", distance)
 
-    def connectToWifi(self):
-        # long press the power button for 5 seconds to reset to adhock mode
-        return self.send_command("wifi BCubed_FL_2G bellabella")
+    def go_forward(self, distance):
+        self.move(self, "forward", distance)
 
-    def getBattery(self):
+    def go_backward(self, distance):
+        self.move(self, "backward", distance)
+
+    def go_left(self, distance):
+        self.move(self, "left", distance)
+
+    def go_right(self, distance):
+        self.move(self, "right", distance)
+
+    def get_battery(self):
         return self.send_command("battery?")
 
-    def getHeight(self):
+    def get_height(self):
         return self.send_command("height?")
 
     # move in a direction a set distance
@@ -63,4 +74,4 @@ class Tello:
         if 20 < distance < 500:
             return self.send_command(direction + " " + distance)
         else:
-            print("Movment out-of-bounds")
+            print("movement out-of-bounds")
